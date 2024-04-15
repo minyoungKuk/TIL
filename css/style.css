@@ -1,0 +1,33 @@
+.tir-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.tir-box {
+  padding: 20px 0;
+  background-color: transparent;
+}
+.tir-box .bg {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(131, 223, 254, 0.554);
+}
+.tir-box .title {
+  padding: 6px 0;
+  border-bottom: 2px solid #9f9f9f;
+  color: #414141;
+}
+
+.tir-box ol {
+  margin: 10px 0 20px 0;
+  font-size: 0.8rem;
+}
+.tir-wrap .date {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.tir-wrap .title {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
