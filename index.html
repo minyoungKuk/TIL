@@ -3,14 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Minyoung's Diary</title>
+    <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
+
+    <script type="module" src="./js/main.js"></script>
   </head>
   <body>
-    <h1 class="title">TIL(Today I Learned)</h1>
+    <!-- <h1 class="title">TIL(Today I Learned)</h1>
     <ul>
       <li><a href="./pages/tir240415.html">1번째 TIL - 2024.04.15</a></li>
       <li><a href="./pages/tir240415.html">2번째 TIL - 2024.04.16</a></li>
-    </ul>
+    </ul> -->
+
+    <div class="wrap">
+      <div class="header">
+        <a href="" class="home">Minyoung's diary</a>
+        <nav>
+          <ul>
+            <li class="active"><a href="">TIL</a></li>
+            <li><a href="">기술일지</a></li>
+            <li><a href="">참고자료</a></li>
+            <li><a href="">Todo</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="main">
+        <h2>TIL - <span>오늘의 내가 새롭게 알게 된 것 📝</span></h2>
+
+        <table width="100%">
+          <thead>
+            <tr>
+              <th width="5" style="text-align: left">no.</th>
+              <th width="85">날짜</th>
+              <th width="10" style="text-align: right">날씨</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <a href="./pages/tir240415.html"
+                  >오늘의 TIL - 2024.04.15 / Mon.</a
+                >
+              </td>
+              <td style="text-align: right">🌧️</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <a href="./pages/tir240416.html"
+                  >오늘의 TIL - 2024.04.16 / Tue.</a
+                >
+              </td>
+              <td style="text-align: right">☀️☀️✨</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        <ul>
+          <li>@내일배움캠프</li>
+          <li>@React 5기 - 국민영</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
