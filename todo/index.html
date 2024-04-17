@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/style.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="module">
       // Firebase SDK 라이브러리 가져오기
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -33,6 +34,24 @@
       // Firebase 인스턴스 초기화
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
+
+      $("#listAddBtn").click(async function () {
+        let lists = $("#todolist").val();
+        let listsDate = $("#todolistdate").val();
+
+        let doc = {
+          lists: lists,
+          listsDate: listsDate,
+        };
+
+        if (lists === "") {
+          alert("추가 할 일을 적어주세요 🥹");
+        } else {
+          await addDoc(collection(db, "todolist"), doc);
+          alert("할 일을 성공적으로 추가하였습니다.");
+          window.location.reload();
+        }
+      });
     </script>
   </head>
   <body>
@@ -56,22 +75,36 @@
         <div class="myListBox">
           <div>
             <input
-              name="todo"
-              type="email"
-              class="form-control"
+              type="text"
               id="todolist"
               style="width: 500px"
               placeholder="해야할 일을 추가해 주세요."
             />
-            <input
-              type="date"
-              class="form-control"
-              id="todolist"
-              placeholder="해야할 일을 추가해 주세요."
-            />
+            <input type="date" id="todolistdate" />
           </div>
 
-          <button>할일 추가</button>
+          <button id="listAddBtn">할일 추가</button>
+        </div>
+
+        <div class="myTodoList">
+          <div class="lists">
+            <div class="txt">Read an article <span>2021.01.02</span></div>
+            <div class="chkbox">
+              <div class="outer-circle">
+                <div class="inner-circle"></div>
+              </div>
+            </div>
+          </div>
+          <div class="lists done">
+            <div class="txt">
+              Being QA for the project <span>2021.01.02</span>
+            </div>
+            <div class="chkbox">
+              <div class="outer-circle">
+                <div class="inner-circle"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

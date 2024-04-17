@@ -130,6 +130,61 @@ button:hover {
   padding: 10px;
 }
 
+.myTodoList {
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.myTodoList .lists {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #fff;
+  align-items: center;
+}
+
+.myTodoList .lists .txt {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+.myTodoList .lists .txt span {
+  display: block;
+  font-size: 0.9rem;
+  padding-top: 10px;
+}
+
+.outer-circle {
+  width: 35px;
+  height: 35px;
+  border: 3px solid #ccc;
+  background-color: transparent;
+  border-radius: 50%;
+  position: relative;
+}
+
+.inner-circle {
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lists.done {
+  color: #ccc;
+}
+.lists.done .outer-circle {
+  border: 3px solid #f39f18;
+}
+
+.lists.done .inner-circle {
+  background-color: #f39f18;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -145,7 +200,7 @@ button:hover {
   align-items: flex-end;
 }
 .footer ul li {
-  color: #fff;
+  color: #ccc;
   font-size: 0.8rem;
   list-style: none;
 }
