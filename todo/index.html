@@ -45,7 +45,7 @@
         };
 
         if (lists === "") {
-          alert("추가 할 일을 적어주세요 🥹");
+          alert(" 해야 할 일을 적어주세요 🥹");
         } else {
           await addDoc(collection(db, "todolist"), doc);
           alert("할 일을 성공적으로 추가하였습니다.");
