@@ -10,6 +10,26 @@
   background-color: #f3f3f3;
 }
 
+.color-main-1 {
+  color: #f39f18;
+}
+.color-main-2 {
+  color: #e77f11;
+}
+
+button {
+  width: 150px;
+  height: 60px;
+  border-radius: 4px;
+  border-color: transparent;
+  background-color: #f39f18;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #e77f11;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -96,11 +116,18 @@
   font-size: 1.4rem;
 }
 
-.color-main-1 {
-  color: #f39f18;
+.myListBox {
+  border: 1px solid #999;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.color-main-2 {
-  color: #e77f11;
+
+.myListBox input {
+  padding: 10px;
 }
 
 .footer {
