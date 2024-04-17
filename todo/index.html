@@ -20,6 +20,7 @@
         getDocs,
         updateDoc,
         doc,
+        deleteDoc,
       } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
       // Firebase 구성 정보 설정
@@ -70,7 +71,7 @@
 
           let temp_html = `
           <div class="lists ${isDone ? "done" : ""}" data-id="${doc.id}">
-            <div class="txt">${list}<span>${listDate}까지 완료해야 합니다 😈</span></div>
+            <div class="txt" id="openModal">${list}<span>${listDate}까지 완료해야 합니다.</span></div>
             <div class="chkbox">
               <div class="outer-circle">
                 <div class="inner-circle"></div>
@@ -99,6 +100,29 @@
         await updateDoc(docRef, {
           done: isDone,
         });
+      });
+
+      $(document).on("click", "#openModal", async function () {
+        // 클릭한 리스트  ID값 가져오기
+        let docId = $(this).closest(".lists").attr("data-id");
+        // 삭제 버튼에 해당 리스트 ID 저장
+        $(".modal-content .delete").attr("data-id", docId);
+
+        $("#modal").fadeIn();
+        $("body").css("background-color", "rgba(0, 0, 0, 0.5)");
+      });
+
+      $(document).on("click", ".modal-content .delete", async function () {
+        let docId = $(this).attr("data-id");
+        await deleteDoc(doc(db, "todolist", docId));
+        $(`.lists[data-id="${docId}"]`).remove();
+        $("#modal").fadeOut();
+        $("body").css("background-color", "#fff");
+      });
+      $(".close").on("click", (e) => {
+        // $('#modal').css('display', 'none')
+        $("#modal").fadeOut();
+        $("body").css("background-color", "#fff");
       });
     </script>
   </head>
@@ -161,6 +185,16 @@
           <li>@내일배움캠프</li>
           <li>@React 5기 - 국민영</li>
         </ul>
+      </div>
+
+      <div id="modal" class="modal_wrap">
+        <div class="modal-content">
+          <p>클릭하신 리스트를 목록에서 삭제할까요?</p>
+          <div class="btns">
+            <button class="btn delete red">삭제</button>
+            <button class="btn close blue">창 닫기</button>
+          </div>
+        </div>
       </div>
     </div>
   </body>
