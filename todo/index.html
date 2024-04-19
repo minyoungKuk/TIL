@@ -30,33 +30,35 @@
       <div class="main">
         <h2>Todo List - <span>까먹지말고 해야 할 일 체크리스트 💌</span></h2>
         <div class="myListBox">
-          <input
-            type="text"
-            id="todolist"
-            style="width: 500px"
-            placeholder="해야할 일을 추가해 주세요."
-          />
-          <input type="date" id="todolistdate" />
+          <div>
+            <input
+              type="text"
+              id="todolist"
+              style="width: 500px"
+              placeholder="해야할 일을 추가해 주세요."
+            />
+            <input type="date" id="todolistdate" />
+          </div>
           <button id="listAddBtn">할일 추가</button>
         </div>
-
-        <div class="myTodoList"></div>
       </div>
 
-      <div class="footer">
-        <ul>
-          <li>@내일배움캠프</li>
-          <li>@React 5기 - 국민영</li>
-        </ul>
-      </div>
+      <div class="myTodoList"></div>
+    </div>
 
-      <div id="modal" class="modal_wrap">
-        <div class="modal-content">
-          <p>클릭하신 리스트를 목록에서 삭제할까요?</p>
-          <div class="btns">
-            <button class="btn delete red">삭제</button>
-            <button class="btn close blue">창 닫기</button>
-          </div>
+    <div class="footer">
+      <ul>
+        <li>@내일배움캠프</li>
+        <li>@React 5기 - 국민영</li>
+      </ul>
+    </div>
+
+    <div id="modal" class="modal_wrap">
+      <div class="modal-content">
+        <p>클릭하신 리스트를 목록에서 삭제할까요?</p>
+        <div class="btns">
+          <button class="btn delete red">삭제</button>
+          <button class="btn close blue">창 닫기</button>
         </div>
       </div>
     </div>
