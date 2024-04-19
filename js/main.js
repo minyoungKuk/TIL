@@ -25,6 +25,65 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+$(document).ready(async function () {
+  let querySnapshot = await getDocs(collection(db, "todolist"));
+  let docs = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+  docs.sort((a, b) => new Date(a.listDate) - new Date(b.listDate));
+
+  docs.forEach((row) => {
+    let list = row["list"];
+    let listDate = row["listDate"];
+    let isDone = row["done"] || false;
+
+    let temp_html = `
+          <div class="lists ${isDone ? "done" : ""}" data-id="${row.id}">
+            <div class="txt" id="openModal">${list}<span>${listDate}까지 완료해야 합니다.</span></div>
+            <div class="chkbox">
+              <div class="outer-circle">
+                <div class="inner-circle"></div>
+              </div>
+            </div>
+          </div>
+        `;
+
+    $(".myTodoList").append(temp_html);
+  });
+});
+
+$(document).on("click", ".myTodoList .chkbox", async function () {
+  $(this).closest(".lists").toggleClass("done");
+
+  let docId = $(this).closest(".lists").attr("data-id");
+  let isDone = $(this).closest(".lists").hasClass("done");
+  let docRef = doc(db, "todolist", docId);
+
+  await updateDoc(docRef, {
+    done: isDone,
+  });
+});
+
+$(document).on("click", "#openModal", async function () {
+  let docId = $(this).closest(".lists").attr("data-id");
+  $(".modal-content .delete").attr("data-id", docId);
+
+  $("#modal").fadeIn();
+  $("body").css("background-color", "rgba(0, 0, 0, 0.5)");
+});
+
+$(document).on("click", ".modal-content .delete", async function () {
+  let docId = $(this).attr("data-id");
+  await deleteDoc(doc(db, "todolist", docId));
+  $(`.lists[data-id="${docId}"]`).remove();
+  $("#modal").fadeOut();
+  $("body").css("background-color", "#fff");
+});
+
+$(".close").on("click", (e) => {
+  $("#modal").fadeOut();
+  $("body").css("background-color", "#fff");
+});
+
 $("#listAddBtn").click(async function () {
   let list = $("#todolist").val();
   let listDate = $("#todolistdate").val();
@@ -44,69 +103,4 @@ $("#listAddBtn").click(async function () {
     alert("할 일을 성공적으로 추가하였습니다.");
     window.location.reload();
   }
-});
-
-$(document).ready(async function () {
-  let docs = await getDocs(collection(db, "todolist"));
-  docs.forEach((doc) => {
-    let row = doc.data();
-
-    let list = row["list"];
-    let listDate = row["listDate"];
-    let isDone = row["done"] || false;
-
-    let temp_html = `
-          <div class="lists ${isDone ? "done" : ""}" data-id="${doc.id}">
-            <div class="txt" id="openModal">${list}<span>${listDate}까지 완료해야 합니다.</span></div>
-            <div class="chkbox">
-              <div class="outer-circle">
-                <div class="inner-circle"></div>
-              </div>
-            </div>
-          </div>
-        `;
-
-    $(".myTodoList").append(temp_html);
-  });
-});
-
-$(document).on("click", ".myTodoList .chkbox", async function () {
-  $(this).closest(".lists").toggleClass("done");
-
-  // 해당 할 일의 ID 가져오기
-  let docId = $(this).closest(".lists").attr("data-id");
-
-  // 해당 할 일의 상태 가져오기
-  let isDone = $(this).closest(".lists").hasClass("done");
-
-  // Firestore에서 해당 할 일 문서 가져오기
-  let docRef = doc(db, "todolist", docId);
-
-  // 해당 할 일 문서 업데이트
-  await updateDoc(docRef, {
-    done: isDone,
-  });
-});
-
-$(document).on("click", "#openModal", async function () {
-  // 클릭한 리스트  ID값 가져오기
-  let docId = $(this).closest(".lists").attr("data-id");
-  // 삭제 버튼에 해당 리스트 ID 저장
-  $(".modal-content .delete").attr("data-id", docId);
-
-  $("#modal").fadeIn();
-  $("body").css("background-color", "rgba(0, 0, 0, 0.5)");
-});
-
-$(document).on("click", ".modal-content .delete", async function () {
-  let docId = $(this).attr("data-id");
-  await deleteDoc(doc(db, "todolist", docId));
-  $(`.lists[data-id="${docId}"]`).remove();
-  $("#modal").fadeOut();
-  $("body").css("background-color", "#fff");
-});
-$(".close").on("click", (e) => {
-  // $('#modal').css('display', 'none')
-  $("#modal").fadeOut();
-  $("body").css("background-color", "#fff");
 });
