@@ -4,9 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minyoung's Diary</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="./js/main.js"></script>
   </head>
   <body>
@@ -28,7 +39,134 @@
       <div class="main">
         <h2>TIL - <span>오늘의 내가 새롭게 알게 된 것 📝</span></h2>
 
-        <table width="100%">
+        <div>
+          <div class="accordion" id="accordionExample">
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  <span class="smalltxt">2024.04.22.월</span>오늘의 TIL
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">강의 내용 정리</div>
+                    <div class="contents">
+                      1.var,let,const를 가장 왼쪽에 작성한다.2. 변수 이름을
+                      작성한다.exname3. =을 작성한다.4. 변수에 담을 실제
+                      데이터를 작성한다.ex철수
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">개발 단계 정리</div>
+                    <div class="contents">
+                      1. 설치하기2. 초기 세팅하기(코드 작성)3. OO 만들기
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">
+                      1. 오늘 있었던 일을 정리한다.2. 오늘 발생했던 일에 대한
+                      느낀 점을 작성한다.단순히 말로만 전달하는 것은 오해를
+                      불러일으킬 수 있다.3. 문제가 있었다면 앞으로 개선 방안을
+                      정리한다.앞으로는 회의 중 문서를 작성하여 모든 사람들이
+                      제대로 이해할 수 있도록 하기로 했다
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      1. 오늘 있었던 일을 정리한다.2. 오늘 발생했던 일에 대한
+                      느낀 점을 작성한다.단순히 말로만 전달하는 것은 오해를
+                      불러일으킬 수 있다.3. 문제가 있었다면 앞으로 개선 방안을
+                      정리한다.앞으로는 회의 중 문서를 작성하여 모든 사람들이
+                      제대로 이해할 수 있도록 하기로 했다
+                    </div>
+                  </div>
+
+                  <strong>This is the first item's accordion body.</strong> It
+                  is shown by default, until the collapse plugin adds the
+                  appropriate classes that we use to style each element. These
+                  classes control the overall appearance, as well as the showing
+                  and hiding via CSS transitions. You can modify any of this
+                  with custom CSS or overriding our default variables. It's also
+                  worth noting that just about any HTML can go within the
+                  <code>.accordion-body</code>, though the transition does limit
+                  overflow.
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse_2"
+                  aria-expanded="false"
+                  aria-controls="collapse_2"
+                >
+                  <span class="smalltxt">2024.04.19.금</span>오늘의 TIL
+                </button>
+              </h2>
+              <div
+                id="collapse_2"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">개발 단계 정리 OR 오늘 배운 것</div>
+                    <div class="contents">
+                      1. 공통으로 작업해할 것 잡아놓기 (깃헙 커밋, 클래스명 등)
+                      <br />
+                      2. 분리될 수 있는 것들 잘 분리해놓기. 기능에 따라 파일
+                      분리. 코드 분리!
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">
+                      오늘은 첫번째 팀 프로젝트가 끝나는 날이다. <br />
+                      첫 프로젝트는 html, css가 바탕이 되었던 프로젝트 같아,
+                      기술적으로 어려움이 있었다기보단, <br />
+                      협업을 잘 할수 있는 방법에 대해 생각해볼수 있던
+                      프로젝트였다. <br />
+                      많이 부족했지만 함께 따라와준 팀원들에게 고마웠고, 깃헙
+                      룰에 대하여 좀 더 공부해봐야할 것 같다.
+                    </div>
+                  </div>
+                  <!-- <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      1. 이전 작업자가 시간이 딜레이 되었을 
+
+                      <code> </code>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+          </div>
+        </div>
+
+        <!-- <table width="100%">
           <thead>
             <tr>
               <th width="5" style="text-align: left">no.</th>
@@ -65,7 +203,7 @@
               <td style="text-align: right">☀️☀️✨</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
 
       <div class="footer">
