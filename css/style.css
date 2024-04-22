@@ -185,6 +185,13 @@ button:hover {
   border-color: #f39f18;
 }
 
+.main .accordion .contents .title {
+  border-color: #e77f11;
+  display: inline-block;
+  padding-right: 20px;
+  margin: 10px 0px;
+}
+
 .tir-box ol {
   margin: 10px 0 20px 0;
   font-size: 0.8rem;
