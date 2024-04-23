@@ -192,6 +192,14 @@ button:hover {
   margin: 10px 0px;
 }
 
+.main .accordion .contents img {
+  width: 100%;
+  padding: 20px;
+  padding-left: 0;
+  max-width: 1000px;
+  display: block;
+}
+
 .tir-box ol {
   margin: 10px 0 20px 0;
   font-size: 0.8rem;

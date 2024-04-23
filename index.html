@@ -119,12 +119,67 @@
                   <div class="inner">
                     <div class="title">문제 해결 과정</div>
                     <div class="contents">
-                      1주차 강의를 끝내며 주어진 문제를 푸는데 분명 맞게
+                      1. 1주차 강의를 끝내며 주어진 문제를 푸는데 분명 맞게
                       풀었는데 계속 이상한 오류가 떴다. <br />
                       2-3번을 봐도 틀릴 이유를 모르겠었는데, 천천히 다시보니
                       length를 붙혀야할 곳에 빼먹은 것때문에 계속 들렸던
                       것이였다 ... ㅠㅠ <br />
-                      꼼꼼하게 작성해나가는 버릇을 들여야겠디. <br />
+                      꼼꼼하게 작성해나가는 버릇을 들여야겠디. <br /><br />
+                      2. 2주차 과제에서 배열들을 순서대로 정렬하는 것은 어렵지
+                      않게 했는데, <br />
+                      특정 idx를 기반으로만 정렬하고 같은 문자열이라면 순서를
+                      그대로 유지하는 것이 매우 어려웠다. <br />
+                      <img src="./assets/img/img0423.png" alt="" />
+                      이 문제인데, 처음 내가 푼 방식은 문자의 해당 인덱스의
+                      문자가 같을때 문자를 그대로 배치해야한다는 것을 까먹어서
+                      모든 테스트 케이스를 만족시키지 못했다. <br /><br />
+                      <code>
+                        function solution(strings, n) { <br />
+                        // strings배열의 단어의 n번째 글자로 재정렬.<br />
+
+                        let newArr = strings.sort((a, b) => a[n] < b[n] ? -1 :
+                        (a[n] > b[n]) ? 1 : 0)<br />
+
+                        return newArr<br />
+                        }<br /><br />
+                      </code>
+                      ㅜㅜ 힌트를 보지않고 해결해보고 싶었는데 시간이 흘러도
+                      해결방안이 잘 생각나지 않아 결국 힌트를 보게 되었다.
+                      <br />
+                      제공된 힌트는 해당 인덱스의 해당하는 문자를 아이템 맨앞에
+                      붙힌뒤 정렬을 하고 그 이후에 맨 앞글자를 삭제하라는
+                      것이였다. <br />
+                      힌트에서도 좋은 방법은 아니지만 현재까지의 강의를 들은
+                      우리에게 가장 쉬운 방법이라고 하니, 일단 힌트에서
+                      제시한대로 문제를 푼 후 나중에 다시 풀어봐야겠다라는
+                      생각이 들었다. <br />
+
+                      <code>
+                        function solution(strings, n) { <br />
+                        for (let i = 0; i < strings.length; i++) { <br />
+                        strings[i] = strings[i][n] + strings[i] <br />
+                        } <br />
+                        <br />
+
+                        strings.sort(); <br />
+                        <br />
+
+                        for (let i = 0; i < strings.length; i++) { <br />
+                        strings[i] = strings[i].split('').slice(1).join('')
+                        <br />
+                        } <br />
+                        <br />
+
+                        return strings <br />
+                        } <br />
+                      </code>
+                      내가 제출하게 된 코드다. <br />
+                      나름 문자열에 n번째 단어를 붙혀 반환한 후 정렬을 하고,
+                      <br />
+                      문자열을 나눈후 0번째 인덱스를 빼고 다시 합쳐 반환하는
+                      형식으로 풀었다. <br /><br />
+                      내가 설명하면서도 좋은 풀이는 아닌거 같다. ㅜㅜ <br />
+                      완강한 후 다시 풀어봐야겠다.
                     </div>
                   </div>
                 </div>
