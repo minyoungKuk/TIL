@@ -48,6 +48,91 @@
                   class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
+                  data-bs-target="#collapse_0423"
+                  aria-expanded="false"
+                  aria-controls="collapse_0423"
+                >
+                  <span class="smalltxt">2024.04.23.화</span> JS 문법 종합반 -
+                  반복문, ES6 문법
+                </button>
+              </h2>
+              <div
+                id="collapse_0423"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">강의 내용 정리</div>
+                    <div class="contents">
+                      오늘들은 강의는 객체와 배열, 그리고 반목문에 관련된
+                      것들이였다. <br />
+                      기억하고 싶은 부분들이 있어 기록해놔야겠다. <br /><br />
+
+                      1. 객체 <br />
+                      - 1. 객체는 안의 내용이 똑같다고 해도 용량이 크기에
+                      '주소'로서 저장되어 같은 객체를 비교해도 false로 나온다.
+                      <br />
+                      객체안에 문자열만을 비교하고자 한다면
+                      <b>JSON.stringify()</b>를 사용하면 된다.<br /><br />
+                      <code>
+                        let person1 = { <br />
+                        name: "홍길동", <br />
+                        age: 30, <br />
+                        gender: "남자", <br />
+                        }; <br /><br />
+
+                        let person2 = { <br />
+                        name: "홍길동", <br />
+                        age: 30, <br />
+                        gender: "남자", <br />
+                        };
+                        <br />
+                        <br />
+
+                        console.log(person1 === person2); // false <br />
+                        console.log(JSON.stringify(person1) ===
+                        JSON.stringify(person2)); // true
+                      </code>
+                    </div>
+                  </div>
+                  <!-- <div class="inner">
+                    <div class="title">개발 단계 정리</div>
+                    <div class="contents">
+                      1. 설치하기2. 초기 세팅하기(코드 작성)3. OO 만들기
+                    </div>
+                  </div> -->
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">
+                      JS 문법 강의를 듣는 첫번째 날이다. <br />
+                      갈수록 어려워지겠지? <br />
+                      기초부터 다시 단단히 잡으며 공부를 해야겠다.
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      1주차 강의를 끝내며 주어진 문제를 푸는데 분명 맞게
+                      풀었는데 계속 이상한 오류가 떴다. <br />
+                      2-3번을 봐도 틀릴 이유를 모르겠었는데, 천천히 다시보니
+                      length를 붙혀야할 곳에 빼먹은 것때문에 계속 들렸던
+                      것이였다 ... ㅠㅠ <br />
+                      꼼꼼하게 작성해나가는 버릇을 들여야겠디. <br />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
                   aria-expanded="false"
                   aria-controls="collapseOne"
@@ -258,45 +343,6 @@
             <!-- items nd -->
           </div>
         </div>
-
-        <!-- <table width="100%">
-          <thead>
-            <tr>
-              <th width="5" style="text-align: left">no.</th>
-              <th width="85">날짜</th>
-              <th width="10" style="text-align: right">날씨</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <a href="./pages/tir240415.html"
-                  >오늘의 TIL - 2024.04.15 / Mon.</a
-                >
-              </td>
-              <td style="text-align: right">🌧️</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>
-                <a href="./pages/tir240416.html"
-                  >오늘의 TIL - 2024.04.16 / Tue.</a
-                >
-              </td>
-              <td style="text-align: right">☀️☀️✨</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>
-                <a href="./pages/tir240417.html"
-                  >오늘의 TIL - 2024.04.17 / Wed.</a
-                >
-              </td>
-              <td style="text-align: right">☀️☀️✨</td>
-            </tr>
-          </tbody>
-        </table> -->
       </div>
 
       <div class="footer">
