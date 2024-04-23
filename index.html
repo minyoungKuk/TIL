@@ -176,6 +176,18 @@
                         let z = y || 20; // y는 undefined로 flasy한 값이니 20이
                         출력된다.
                       </code>
+                      2. entries<br />
+                      <code>
+                        let person = {<br />
+                        name: "홍길동",<br />
+                        age: 30,<br />
+                        gender: "남자",<br />
+                        };<br />
+                        let entries = Object.entries(person);<br />
+                        console.log("entries => ", entries); // entries => [ [
+                        'name', '홍길동' ], [ 'age', 30 ], [ 'gender', '남자' ]
+                        ]<br />
+                      </code>
                     </div>
                   </div>
                   <!-- <div class="inner">
