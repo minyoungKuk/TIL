@@ -48,6 +48,169 @@
                   class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
+                  data-bs-target="#collapse_0424"
+                  aria-expanded="false"
+                  aria-controls="collapse_0424"
+                >
+                  <span class="smalltxt">2024.04.24.수</span> JS 문법 종합반 -
+                  데이터 타입 / 알고리즘 특강 / 개인 프로젝트 시작
+                </button>
+              </h2>
+              <div
+                id="collapse_0424"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">강의 내용 정리</div>
+                    <div class="contents">
+                      오늘은 데이터 타입 심화 강의를 들었는데, 코드치며 따라하는
+                      강의보다 시간이 더 걸리는 것 같다. <br />
+                      내일까지 3주차 강의를 끝내야야겠다.
+                      <br /><br />
+
+                      1. 얕은 복사, 깊은 복사 <br />
+                      - 얕은 복사를 하게되면 하드코딩을 하지 않고도 객체의 모든
+                      프로터티의 속성에 접근 가능하다. <br />
+                      하지만 객체안에 객체까지는 접근하기 위에서는 깊은 복사를
+                      사용해야 한다. <br /><br />
+                      <code>
+                        // 깊은 복사<br />
+                        let copyObjectDeep = (target) => {<br />
+                        // target 객체를 복사하여 반환<br />
+                        let result = {}; // 요기에 복사된 것들이 추가
+                        될것이다!<br /><br />
+
+                        if (typeof target === "object" && target !== null) {<br />
+                        // 타겟이 객체이며, 빈값이 아닌지 확인한후 밑줄의 포문
+                        실행~<br />
+                        for (let prop in target) {<br />
+                        result[prop] = copyObjectDeep(target[prop]); //
+                        재귀적으로 "copyObjectDeep"함수도 호출하여
+                        <br />내부객체까지 복사.<br />
+                        }<br />
+                        } else {<br />
+                        result = target;<br />
+                        }<br />
+                        return result;<br />
+                        };<br /><br />
+                      </code>
+
+                      2. 실행컨텍스트: 실행할 코드에 제공할 환경정보를 모아놓은
+                      객체. <br />
+                      - 선언된 변수를 위로 끌어 올린다! = hoisting<br />
+                      - 외부 환경 정보를 구상 <br />
+                      - this값을 설정<br /><br />
+
+                      2. 콜 스택<br />
+                      <img
+                        src="https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F13ecd27d-f865-4f0a-b782-2992a3eabdc8%2FUntitled.png?table=block&id=e0df9a66-2ed4-4df5-a804-6898271c3f88&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1050&userId=&cache=v2"
+                        alt=""
+                      />
+                      <code>
+                        //// * call stack flow<br />
+                        let a = 1; // 1 번 // 6번 전역 아웃 후 코드 종료<br />
+                        function outer() {<br />
+                        // 4번 아우터 재개<br />
+                        function inner() {<br />
+                        console.log(a);<br />
+                        a = 3; // 5번 아우터 아웃<br />
+                        }<br /><br />
+
+                        inner(); // 3번 아우터 중단 / 이너 인<br />
+                        console.log(a);<br />
+                        }<br />
+                        outer(); // 2번 아우터 인.<br />
+                        console.log(a);<br />
+                      </code>
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">개발 단계 정리</div>
+                    <div class="contents">1. API 연결 완.</div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">CS는 언제 재밌어지려나 ㅎㅎ</div>
+                  </div>
+                  <!-- <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      1. 1주차 강의를 끝내며 주어진 문제를 푸는데 분명 맞게
+                      풀었는데 계속 이상한 오류가 떴다. <br />
+                      2-3번을 봐도 틀릴 이유를 모르겠었는데, 천천히 다시보니
+                      length를 붙혀야할 곳에 빼먹은 것때문에 계속 들렸던
+                      것이였다 ... ㅠㅠ <br />
+                      꼼꼼하게 작성해나가는 버릇을 들여야겠디. <br /><br />
+                      2. 2주차 과제에서 배열들을 순서대로 정렬하는 것은 어렵지
+                      않게 했는데, <br />
+                      특정 idx를 기반으로만 정렬하고 같은 문자열이라면 순서를
+                      그대로 유지하는 것이 매우 어려웠다. <br />
+                      <img src="./assets/img/img0423.png" alt="" />
+                      이 문제인데, 처음 내가 푼 방식은 문자의 해당 인덱스의
+                      문자가 같을때 문자를 그대로 배치해야한다는 것을 까먹어서
+                      모든 테스트 케이스를 만족시키지 못했다. <br /><br />
+                      <code>
+                        function solution(strings, n) { <br />
+                        // strings배열의 단어의 n번째 글자로 재정렬.<br />
+
+                        let newArr = strings.sort((a, b) => a[n] < b[n] ? -1 :
+                        (a[n] > b[n]) ? 1 : 0)<br />
+
+                        return newArr<br />
+                        }<br /><br />
+                      </code>
+                      ㅜㅜ 힌트를 보지않고 해결해보고 싶었는데 시간이 흘러도
+                      해결방안이 잘 생각나지 않아 결국 힌트를 보게 되었다.
+                      <br />
+                      제공된 힌트는 해당 인덱스의 해당하는 문자를 아이템 맨앞에
+                      붙힌뒤 정렬을 하고 그 이후에 맨 앞글자를 삭제하라는
+                      것이였다. <br />
+                      힌트에서도 좋은 방법은 아니지만 현재까지의 강의를 들은
+                      우리에게 가장 쉬운 방법이라고 하니, 일단 힌트에서
+                      제시한대로 문제를 푼 후 나중에 다시 풀어봐야겠다라는
+                      생각이 들었다. <br />
+
+                      <code>
+                        function solution(strings, n) { <br />
+                        for (let i = 0; i < strings.length; i++) { <br />
+                        strings[i] = strings[i][n] + strings[i] <br />
+                        } <br />
+                        <br />
+
+                        strings.sort(); <br />
+                        <br />
+
+                        for (let i = 0; i < strings.length; i++) { <br />
+                        strings[i] = strings[i].split('').slice(1).join('')
+                        <br />
+                        } <br />
+                        <br />
+
+                        return strings <br />
+                        } <br />
+                      </code>
+                      내가 제출하게 된 코드다. <br />
+                      문자열에 n번째 단어를 붙혀 반환한 후 정렬을 하고,
+                      <br />
+                      문자열을 나눈후 0번째 인덱스를 빼고 다시 합쳐 반환하는
+                      형식으로 풀었다. <br /><br />
+                      내가 설명하면서도 좋은 풀이는 아닌거 같다. ㅜㅜ <br />
+                      완강한 후 다시 풀어봐야겠다.
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
                   data-bs-target="#collapse_0423"
                   aria-expanded="false"
                   aria-controls="collapse_0423"
