@@ -52,6 +52,242 @@
                   aria-expanded="false"
                   aria-controls="collapse_0425"
                 >
+                  <span class="smalltxt">2024.04.26.금</span> JS 문법 종합반 -
+                  콜백함수, Promise, async await / 알고리즘 특강
+                </button>
+              </h2>
+              <div
+                id="collapse_0425"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">강의 내용 정리</div>
+                    <div class="contents">
+                      <strong>Promise</strong> <br />
+                      비동기 처리에 대해, 처리가 끝나면 알려달라는 ‘약속’<br />
+                      <code>
+                        var addCoffee = function (name) {<br />
+                        return function (prevName) {<br />
+                        return new Promise(function (resolve) {<br />
+                        setTimeout(function () {<br />
+                        var newName = prevName ? (prevName + ', ' + name) :
+                        name;<br />
+                        console.log(newName);<br />
+                        resolve(newName);<br />
+                        }, 500);<br />
+                        });<br />
+                        };<br />
+                        };<br /><br />
+
+                        addCoffee('에스프레소')()<br />
+                        .then(addCoffee('아메리카노'))<br />
+                        .then(addCoffee('카페모카'))<br />
+                        .then(addCoffee('카페라떼'));<br /><br />
+                      </code>
+
+                      <strong>Generator</strong><br />
+                      *가 붙은 함수가 제너레이터 함수<br />
+                      제너레이터 함수는 실행하면, Iterator 객체가 반환(next()를
+                      가지고 있음)<br />
+                      비동기 작업이 완료되는 시점마다 next 메서드를 호출해주면
+                      Generator 함수 내부소스가 위 -> 아래 순차적으로 진행<br />
+                      <code>
+                        var addCoffee = function (prevName, name) {<br />
+                        setTimeout(function () {<br />
+                        coffeeMaker.next(prevName ? prevName + ', ' + name :
+                        name);<br />
+                        }, 500);<br />
+                        };<br /><br />
+                        var coffeeGenerator = function* () {<br />
+                        var espresso = yield addCoffee('', '에스프레소');<br />
+                        console.log(espresso);<br />
+                        var americano = yield addCoffee(espresso,
+                        '아메리카노');<br />
+                        console.log(americano);<br />
+                        var mocha = yield addCoffee(americano, '카페모카');<br />
+                        console.log(mocha);<br />
+                        var latte = yield addCoffee(mocha, '카페라떼');<br />
+                        console.log(latte);<br />
+                        };<br /><br />
+                        var coffeeMaker = coffeeGenerator();<br />
+                        coffeeMaker.next();<br /><br />
+                      </code>
+
+                      <strong>Promise + Async/await</strong><br />
+                      Promise ~ then과 동일한 효과<br />
+                      <code>
+                        var addCoffee = function (name) {<br />
+                        return new Promise(function (resolve) {<br />
+                        setTimeout(function(){<br />
+                        resolve(name);<br />
+                        }, 500);<br />
+                        });<br />
+                        };<br /><br />
+                        var coffeeMaker = async function () {<br />
+                        var coffeeList = '';<br />
+                        var _addCoffee = async function (name) {<br />
+                        coffeeList += (coffeeList ? ', ' : '') + await
+                        addCoffee(name);<br />
+                        };<br />
+                        await _addCoffee('에스프레소');<br />
+                        console.log(coffeeList);<br />
+                        await _addCoffee('아메리카노');<br />
+                        console.log(coffeeList);<br />
+                        await _addCoffee('카페모카');<br />
+                        console.log(coffeeList);<br />
+                        await _addCoffee('카페라떼');<br />
+                        console.log(coffeeList);<br />
+                        };<br />
+                        coffeeMaker();<br /><br />
+                      </code>
+                    </div>
+                  </div>
+                  <!-- <div class="inner">
+                    <div class="title">개발 단계 정리</div>
+                    <div class="contents">
+                      튜터님께 코드 보여드리고, 다시 사용할 수도 있는 함수를
+                      따로 빼주는 것에 대한 피드백을 받은 후 리팩토링하는 시간을
+                      가졌다.
+                    </div>
+                  </div> -->
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">
+                      강의를 들으며 새로운 지식들이 갑자기 너무 많이 생겨서
+                      어렵다 .. ㅎㅎ <br />
+                      꼭 다시 한번 돌려야겠다.
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      <strong>아래의 코드를 async/await 로 리팩토링</strong
+                      ><br />
+                      <code>
+                        class HttpError extends Error { <br />
+                        constructor(response) { <br />
+                        super(`${response.status} for ${response.url}`); <br />
+                        this.name = 'HttpError'; <br />
+                        this.response = response; <br />
+                        } <br />
+                        } <br />
+                        <br />
+
+                        function loadJson(url) { <br />
+                        return fetch(url) <br />
+                        .then(response => { <br />
+                        if (response.status == 200) { <br />
+                        return response.json(); <br />
+                        } else { <br />
+                        throw new HttpError(response); <br />
+                        } <br />
+                        }) <br />
+                        } <br />
+                        <br />
+
+                        function narutoIsNotOtaku() { <br />
+                        let title = prompt("애니메이션 제목을 입력하세요.",
+                        "naruto"); <br />
+                        <br />
+
+                        return
+                        loadJson(`https://animechan.xyz/api/random/anime?title=${title}`)
+                        <br />
+                        .then(res => { <br />
+                        alert(`${res.character}: ${res.quote}.`); <br />
+                        return res; <br />
+                        }) <br />
+                        .catch(err => { <br />
+                        if (err instanceof HttpError && err.response.status ==
+                        404) { <br />
+                        alert("일치하는 애니메이션이 없습니다. 일반인이시면
+                        naruto, onepiece 정도나 <br />입력해주세요!"); <br />
+                        return narutoIsNotOtaku(); <br />
+                        } else { <br />
+                        throw err; <br />
+                        } <br />
+                        }); <br />
+                        } <br />
+                        <br />
+
+                        narutoIsNotOtaku(); <br /><br /><br />
+                      </code>
+
+                      일단 모르는 메서드?가 많아서 더 어렵게 느껴졌다. <br />
+                      문제에 위의 class HttpError extends Error 부분은 수정이
+                      필요 없다고 했으니, 제외하고 수정을 하면 되는 문제였다.
+                      <br />
+                      이런 문제는 처음 풀어봐서 처음 봤을때는 너무 어렵게
+                      느껴졌지만 이전 강의를 들으며 필기했던것을 참고하고,
+                      구글링도 하고 ㅎㅎ 하며 결국 풀었다! <br />
+                      밑에 코드는 내가 제출한 코드인데 코드에서 풀이과정을
+                      설명해보겠다. <br /><br />
+
+                      <code>
+                        const loadJson = async (url) => { <br />
+                        const response = await fetch(url); // fetch를 사용하여
+                        데이터를 가져온 후에 response 객체의 status를 체크
+                        <br />
+                        // 성공적으로 데이터를 불러오면 JSON 데이터를
+                        resolve하고, 그렇지 않으면 HttpError를 throw <br />
+                        if (!response.ok) { <br />
+                        throw new HttpError(response); <br />
+                        } <br />
+                        return response.json(); <br />
+                        }; <br /><br />
+
+                        // 애니메이션 정보를 가져오는 비동기 함수를 정의합니다.
+                        <br />
+                        const narutoIsNotOtaku = async () => { <br />
+                        let title = prompt("애니메이션 제목을 입력하세요.",
+                        "naruto"); <br /><br />
+
+                        try { <br />
+                        // 입력받은 제목으로 API에서 JSON 데이터를 로드하고
+                        await를 사용하여 응답을 기다림 const res = await
+                        loadJson( <br />
+                        `https://animechan.xyz/api/random/anime?title=${title}`
+                        ); <br />
+                        alert(`${res.character}: ${res.quote}.`);<br />
+                        return res;<br />
+                        } catch (err) {<br />
+                        if (err instanceof HttpError && err.response.status ==
+                        404) {<br />
+                        alert(<br />
+                        "일치하는 애니메이션이 없습니다. 일반인이시면 naruto,
+                        onepiece 정도나 입력해주세요!"<br />
+                        );<br />
+                        return narutoIsNotOtaku();<br />
+                        } else {<br />
+                        throw err;<br />
+                        }<br />
+                        }<br />
+                        };
+                        <br /><br />
+                        // 애니메이션 정보를 다시 입력받도록 재귀적으로 함수를
+                        호출<br />
+                        narutoIsNotOtaku();<br />
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse_0425"
+                  aria-expanded="false"
+                  aria-controls="collapse_0425"
+                >
                   <span class="smalltxt">2024.04.25.목</span> JS 문법 종합반 -
                   실행 컨텍스트 (this, call, apply, bind) / 알고리즘 특강 / 개인
                   프로젝트 마무리
