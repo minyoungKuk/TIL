@@ -48,6 +48,306 @@
                   class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
+                  data-bs-target="#collapse_0429"
+                  aria-expanded="false"
+                  aria-controls="collapse_0429"
+                >
+                  <span class="smalltxt">2024.04.26.금</span> JS 문법 종합반 -
+                  콜백함수, Promise, async await / 알고리즘 특강
+                </button>
+              </h2>
+              <div
+                id="collapse_0429"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">강의 내용 정리</div>
+                    <div class="contents">
+                      <strong
+                        >DOM이 브라우저에 내장되어있기 때문에 우리는 HTML의
+                        내용일 JS로 접근, 제어 할 수 있다.</strong
+                      >
+                      <br /><br />
+
+                      <strong>Getter , Setter</strong> <br />
+                      <p>
+                        _ (underscore) 사용하는 이유는 계속 내부로 들어가서
+                        돌게되는 구조라 게터, 세터에서 무한루프에 빠지게 될 수
+                        있다. 언더스코어는 프라이빗하다는 뜻으로 은밀하고
+                        감춰진다는 의미로 사용된다고 한다.
+                      </p>
+                      <br />
+                      <code>
+                        class Car { <br />
+                        constructor(modelName, modelYear, type, price) { <br />
+                        this._modelName = modelName; <br />
+                        this._modelYear = modelYear; <br />
+                        this._type = type; <br />
+                        this._price = price; <br />
+                        } <br />
+                        <br />
+
+                        get modelName() { <br />
+                        return this._modelName; <br />
+                        } <br />
+                        <br />
+
+                        // 입력값에 대한 검증까지 가능하다 <br />
+                        set modelName(value) { <br />
+                        // 유효성 검사 <br />
+                        if (value.length <= 0) { <br />
+                        console.log("[오류] 모델명이 입력되지 않았습니다.
+                        확인해주세요!"); <br />
+                        return; <br />
+                        } else if (typeof value !== "string") { <br />
+                        console.log("[오류] 입력된 모델명이 문자형이
+                        아닙니다!"); <br />
+                        return; <br />
+                        } <br />
+                        <br />
+
+                        // 검증이 완료된 경우에만 setting! <br />
+                        this._modelName = value; <br />
+                        } <br />
+                        <br />
+
+                        get modelYear() { <br />
+                        return this._modelYear; <br />
+                        } <br />
+                        <br />
+
+                        set modelYear(value) { <br />
+                        // 유효성 검사 <br />
+                        if (value.length !== 4) { <br />
+                        // 연도에 대한 유효성 검증 로직 ---> googling
+                        엄청~~~~많이 나옵니다!! <br />
+                        console.log("[오류] 입력된 년도가 4자리가
+                        아닙니다.확인해주세요!"); <br />
+                        return; <br />
+                        } else if (typeof value !== "string") { <br />
+                        console.log("[오류] 입력된 모델명이 문자형이
+                        아닙니다!"); <br />
+                        return; <br />
+                        } <br />
+                        <br />
+
+                        // 검증이 완료된 경우에만 setting! <br />
+                        this._modelYear = value; <br />
+                        } <br />
+                        <br />
+
+                        get type() { <br />
+                        return this._type; <br />
+                        } <br />
+                        <br />
+                        set type(value) { <br />
+                        if (value.length <= 0) { <br />
+                        console.log("[오류] 타입이 입력되지 않았습니다.
+                        확인해주세요!"); <br />
+                        return; <br />
+                        } else if (value !== "g" && value !== "d" && value !==
+                        "e") { <br />
+                        // g(가솔린), d(디젤), e(전기차)가 아닌 경우 오류 <br />
+                        console.log("[오류] 입력된 타입이 잘못되었습니다.
+                        확인해주세요!"); <br />
+                        return; <br />
+                        } <br />
+                        <br />
+
+                        // 검증 완료! <br />
+                        this._type = value; <br />
+                        } <br />
+                        <br />
+
+                        get price() { <br />
+                        return this._price; <br />
+                        }
+                        <br />
+                        <br />
+                        set price(value) { <br />
+                        if (typeof value !== "number") { <br />
+                        console.log("[오류] 가격으로 입력된 값이 숫자가
+                        아닙니다. 확인해주세요!"); <br />
+                        return; <br />
+                        } else if (value < "1000000") { <br />
+                        console.log("[오류] 가격은 100만원보다 작을 수 없습니다.
+                        확인해주세요!"); <br />
+                        return; <br />
+                        }
+                        <br />
+                        <br />
+                        // 검증이 완료된 경우 <br />
+                        this._price = value; <br />
+                        } <br />
+                        <br />
+
+                        // 클락션을 울리는 메서드 <br />
+                        makeNoise() { <br />
+                        console.log(this._modelName + ": 빵!"); <br />
+                        } <br />
+                        <br />
+                        // 해당 자동차가 몇년도 모델인지 출력하는 메서드 작성!
+                        <br />
+                        printModelYear() { <br />
+                        console.log( <br />
+                        this._modelName + "은 " + this._modelYear + "년도의
+                        모델입니다." <br />
+                        ); <br />
+                        } <br />
+                        } <br />
+                        <br />
+
+                        // 자동차 만들기 <br />
+                        const car1 = new Car("Sorento", "2023", "e", 5000);
+                        <br />
+                        const car2 = new Car("SM5", "1999", "g", 3000); <br />
+                        const car3 = new Car("Palisade", "2010", "d", 4500);
+                        <br />
+                        <br />
+                        // getter 예시1 <br />
+                        console.log(car1.modelName); <br />
+                        <br />
+                        // setter 예시1 <br />
+                        car1.modelName = 1; <br />
+                        console.log(car1.modelName); <br />
+                        <br />
+                      </code>
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">
+                      오늴 강의는 정보처리기사 공부하며 살짝 맛봤던 부분들이
+                      많이 나왔다. <br />
+                      확실히 그냥 이론적으로만 공부했을때보단 직접 코드 쳐보며
+                      공부하니 이해가 더 잘되어 좋았다.
+                    </div>
+                  </div>
+                  <!-- <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      <strong>아래의 코드를 async/await 로 리팩토링</strong
+                      ><br />
+                      <code>
+                        class HttpError extends Error { <br />
+                        constructor(response) { <br />
+                        super(`${response.status} for ${response.url}`); <br />
+                        this.name = 'HttpError'; <br />
+                        this.response = response; <br />
+                        } <br />
+                        } <br />
+                        <br />
+
+                        function loadJson(url) { <br />
+                        return fetch(url) <br />
+                        .then(response => { <br />
+                        if (response.status == 200) { <br />
+                        return response.json(); <br />
+                        } else { <br />
+                        throw new HttpError(response); <br />
+                        } <br />
+                        }) <br />
+                        } <br />
+                        <br />
+
+                        function narutoIsNotOtaku() { <br />
+                        let title = prompt("애니메이션 제목을 입력하세요.",
+                        "naruto"); <br />
+                        <br />
+
+                        return
+                        loadJson(`https://animechan.xyz/api/random/anime?title=${title}`)
+                        <br />
+                        .then(res => { <br />
+                        alert(`${res.character}: ${res.quote}.`); <br />
+                        return res; <br />
+                        }) <br />
+                        .catch(err => { <br />
+                        if (err instanceof HttpError && err.response.status ==
+                        404) { <br />
+                        alert("일치하는 애니메이션이 없습니다. 일반인이시면
+                        naruto, onepiece 정도나 <br />입력해주세요!"); <br />
+                        return narutoIsNotOtaku(); <br />
+                        } else { <br />
+                        throw err; <br />
+                        } <br />
+                        }); <br />
+                        } <br />
+                        <br />
+
+                        narutoIsNotOtaku(); <br /><br /><br />
+                      </code>
+
+                      일단 모르는 메서드?가 많아서 더 어렵게 느껴졌다. <br />
+                      문제에 위의 class HttpError extends Error 부분은 수정이
+                      필요 없다고 했으니, 제외하고 수정을 하면 되는 문제였다.
+                      <br />
+                      이런 문제는 처음 풀어봐서 처음 봤을때는 너무 어렵게
+                      느껴졌지만 이전 강의를 들으며 필기했던것을 참고하고,
+                      구글링도 하고 ㅎㅎ 하며 결국 풀었다! <br />
+                      밑에 코드는 내가 제출한 코드인데 코드에서 풀이과정을
+                      설명해보겠다. <br /><br />
+
+                      <code>
+                        const loadJson = async (url) => { <br />
+                        const response = await fetch(url); // fetch를 사용하여
+                        데이터를 가져온 후에 response 객체의 status를 체크
+                        <br />
+                        // 성공적으로 데이터를 불러오면 JSON 데이터를
+                        resolve하고, 그렇지 않으면 HttpError를 throw <br />
+                        if (!response.ok) { <br />
+                        throw new HttpError(response); <br />
+                        } <br />
+                        return response.json(); <br />
+                        }; <br /><br />
+
+                        // 애니메이션 정보를 가져오는 비동기 함수를 정의합니다.
+                        <br />
+                        const narutoIsNotOtaku = async () => { <br />
+                        let title = prompt("애니메이션 제목을 입력하세요.",
+                        "naruto"); <br /><br />
+
+                        try { <br />
+                        // 입력받은 제목으로 API에서 JSON 데이터를 로드하고
+                        await를 사용하여 응답을 기다림 const res = await
+                        loadJson( <br />
+                        `https://animechan.xyz/api/random/anime?title=${title}`
+                        ); <br />
+                        alert(`${res.character}: ${res.quote}.`);<br />
+                        return res;<br />
+                        } catch (err) {<br />
+                        if (err instanceof HttpError && err.response.status ==
+                        404) {<br />
+                        alert(<br />
+                        "일치하는 애니메이션이 없습니다. 일반인이시면 naruto,
+                        onepiece 정도나 입력해주세요!"<br />
+                        );<br />
+                        return narutoIsNotOtaku();<br />
+                        } else {<br />
+                        throw err;<br />
+                        }<br />
+                        }<br />
+                        };
+                        <br /><br />
+                        // 애니메이션 정보를 다시 입력받도록 재귀적으로 함수를
+                        호출<br />
+                        narutoIsNotOtaku();<br />
+                      </code>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
                   data-bs-target="#collapse_0425"
                   aria-expanded="false"
                   aria-controls="collapse_0425"
