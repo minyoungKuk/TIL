@@ -39,8 +39,261 @@
       <div class="main">
         <h2>TIL - <span>오늘의 내가 새롭게 알게 된 것 📝</span></h2>
 
+        <div class="form-area" style="display: none">
+          <!-- 입력 폼 -->
+          <form id="til-form">
+            <label for="til-date">날짜:</label><br />
+            <input type="date" id="til-date" name="til-date" /><br />
+
+            <label for="til-title">제목:</label><br />
+            <input type="text" id="til-title" name="til-title" /><br />
+
+            <label for="til-summary">강의 내용 정리:</label><br />
+            <textarea
+              id="til-summary"
+              name="til-summary"
+              rows="4"
+              cols="50"
+            ></textarea
+            ><br />
+
+            <label for="til-reflection">하루 회고:</label><br />
+            <textarea
+              id="til-reflection"
+              name="til-reflection"
+              rows="4"
+              cols="50"
+            ></textarea
+            ><br />
+
+            <label for="til-problem-solving">문제 해결 과정:</label><br />
+            <textarea
+              id="til-problem-solvingt"
+              name="til-problem-solving"
+              rows="4"
+              cols="50"
+            ></textarea
+            ><br />
+
+            <button type="submit">글쓰기</button>
+          </form>
+        </div>
+
         <div>
           <div class="accordion" id="accordionExample">
+            <!-- items st -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse_0430"
+                  aria-expanded="false"
+                  aria-controls="collapse_0430"
+                >
+                  <span class="smalltxt">2024.04.30.화</span> JS 문법 종합반 -
+                  클로저 / 깃허브 심화 특강
+                </button>
+              </h2>
+              <div
+                id="collapse_0430"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="inner">
+                    <div class="title">강의 내용 정리</div>
+                    <div class="contents">
+                      <strong>클로저에 대한 정의</strong><br />
+                      <p>
+                        A closure is the combination of a function and the
+                        lexical environment within which that function was
+                        declared(클로저는 함수와 그 함수가 선언된 렉시컬
+                        환경과의 조합니다.) - MDN
+                      </p>
+                      <br />
+                      <code>
+                        function foo() {<br />
+                        const x = 1;<br />
+                        const y = 2;<br /><br />
+
+                        // 클로저의 예<br />
+                        // 중첩 함수 bar는 외부 함수보다 더 오래 유지되며<br />
+                        // 상위 스코프의 식별자를 참조한다.<br />
+                        function bar() {<br />
+                        debugger;<br />
+                        console.log(x);<br />
+                        }<br />
+                        return bar;<br />
+                        }<br />
+                        <br />
+                        const bar = foo();<br />
+                        bar();<br />
+                        <br />
+                        <br />
+                      </code>
+                      <strong>클로저 사용 이유</strong> <br />
+                      <p>
+                        - 주로 ‘상태를 안전하게 변경하고 유지하기 위해 사용’<br />
+                        - 상태를 안전하게 은닉한다(특정 함수에게만 상태 변경을
+                        허용한다)는 표현을 기억<br />
+                      </p>
+                      <code>
+                        // 카운트 상태 변경 함수 #4<br />
+                        // 클로저 카운트 기능 확장(값 감소 기능 추가)<br />
+                        const counter = (function () {<br />
+                        //카운트 상태 변수<br />
+                        let num = 0;<br /><br />
+
+                        // 클로저인 메서드(increase, decrease)를 갖는 객체를
+                        반환한다.<br />
+                        // property는 public -> 은닉되지 않는다.<br />
+                        return {<br />
+                        increase() {<br />
+                        return ++num;<br />
+                        },<br />
+                        decrease() {<br />
+                        return num > 0 ? --num : 0;<br />
+                        },<br />
+                        };<br />
+                        })();<br /><br />
+
+                        console.log(counter.increase()); // 1<br />
+                        console.log(counter.increase()); // 2<br />
+                        <br />
+                        console.log(counter.decrease()); // 1<br />
+                        console.log(counter.decrease()); // 0<br /><br />
+                      </code>
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <div class="title">하루 회고</div>
+                    <div class="contents">
+                      내일 <br />
+                      - 숫자 게임 다시 하기 <br />
+                      - TIL 수정 <br />
+                      - github 특강 복습 <br />
+                      해야겠다 <br />
+                    </div>
+                  </div>
+                  <!-- <div class="inner">
+                    <div class="title">문제 해결 과정</div>
+                    <div class="contents">
+                      <strong>아래의 코드를 async/await 로 리팩토링</strong
+                      ><br />
+                      <code>
+                        class HttpError extends Error { <br />
+                        constructor(response) { <br />
+                        super(`${response.status} for ${response.url}`); <br />
+                        this.name = 'HttpError'; <br />
+                        this.response = response; <br />
+                        } <br />
+                        } <br />
+                        <br />
+
+                        function loadJson(url) { <br />
+                        return fetch(url) <br />
+                        .then(response => { <br />
+                        if (response.status == 200) { <br />
+                        return response.json(); <br />
+                        } else { <br />
+                        throw new HttpError(response); <br />
+                        } <br />
+                        }) <br />
+                        } <br />
+                        <br />
+
+                        function narutoIsNotOtaku() { <br />
+                        let title = prompt("애니메이션 제목을 입력하세요.",
+                        "naruto"); <br />
+                        <br />
+
+                        return
+                        loadJson(`https://animechan.xyz/api/random/anime?title=${title}`)
+                        <br />
+                        .then(res => { <br />
+                        alert(`${res.character}: ${res.quote}.`); <br />
+                        return res; <br />
+                        }) <br />
+                        .catch(err => { <br />
+                        if (err instanceof HttpError && err.response.status ==
+                        404) { <br />
+                        alert("일치하는 애니메이션이 없습니다. 일반인이시면
+                        naruto, onepiece 정도나 <br />입력해주세요!"); <br />
+                        return narutoIsNotOtaku(); <br />
+                        } else { <br />
+                        throw err; <br />
+                        } <br />
+                        }); <br />
+                        } <br />
+                        <br />
+
+                        narutoIsNotOtaku(); <br /><br /><br />
+                      </code>
+
+                      일단 모르는 메서드?가 많아서 더 어렵게 느껴졌다. <br />
+                      문제에 위의 class HttpError extends Error 부분은 수정이
+                      필요 없다고 했으니, 제외하고 수정을 하면 되는 문제였다.
+                      <br />
+                      이런 문제는 처음 풀어봐서 처음 봤을때는 너무 어렵게
+                      느껴졌지만 이전 강의를 들으며 필기했던것을 참고하고,
+                      구글링도 하고 ㅎㅎ 하며 결국 풀었다! <br />
+                      밑에 코드는 내가 제출한 코드인데 코드에서 풀이과정을
+                      설명해보겠다. <br /><br />
+
+                      <code>
+                        const loadJson = async (url) => { <br />
+                        const response = await fetch(url); // fetch를 사용하여
+                        데이터를 가져온 후에 response 객체의 status를 체크
+                        <br />
+                        // 성공적으로 데이터를 불러오면 JSON 데이터를
+                        resolve하고, 그렇지 않으면 HttpError를 throw <br />
+                        if (!response.ok) { <br />
+                        throw new HttpError(response); <br />
+                        } <br />
+                        return response.json(); <br />
+                        }; <br /><br />
+
+                        // 애니메이션 정보를 가져오는 비동기 함수를 정의합니다.
+                        <br />
+                        const narutoIsNotOtaku = async () => { <br />
+                        let title = prompt("애니메이션 제목을 입력하세요.",
+                        "naruto"); <br /><br />
+
+                        try { <br />
+                        // 입력받은 제목으로 API에서 JSON 데이터를 로드하고
+                        await를 사용하여 응답을 기다림 const res = await
+                        loadJson( <br />
+                        `https://animechan.xyz/api/random/anime?title=${title}`
+                        ); <br />
+                        alert(`${res.character}: ${res.quote}.`);<br />
+                        return res;<br />
+                        } catch (err) {<br />
+                        if (err instanceof HttpError && err.response.status ==
+                        404) {<br />
+                        alert(<br />
+                        "일치하는 애니메이션이 없습니다. 일반인이시면 naruto,
+                        onepiece 정도나 입력해주세요!"<br />
+                        );<br />
+                        return narutoIsNotOtaku();<br />
+                        } else {<br />
+                        throw err;<br />
+                        }<br />
+                        }<br />
+                        };
+                        <br /><br />
+                        // 애니메이션 정보를 다시 입력받도록 재귀적으로 함수를
+                        호출<br />
+                        narutoIsNotOtaku();<br />
+                      </code>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <!-- items nd -->
+
             <!-- items st -->
             <div class="accordion-item">
               <h2 class="accordion-header">

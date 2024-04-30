@@ -26,6 +26,30 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 $(document).ready(async function () {
+  let querySnapshot = await getDocs(collection(db, "til"));
+  let docs = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+  docs.sort((a, b) => new Date(a.listDate) - new Date(b.listDate));
+
+  let title = row["list"];
+  let tilDate = row["listDate"];
+  let isDone = row["done"] || false;
+
+  let temp_html = `
+        <div class="lists ${isDone ? "done" : ""}" data-id="${row.id}">
+          <div class="txt" id="openModal">${list}<span>${listDate}까지 완료해야 합니다.</span></div>
+          <div class="chkbox">
+            <div class="outer-circle">
+              <div class="inner-circle"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+  $(".accordion").append(temp_html);
+});
+
+$(document).ready(async function () {
   let querySnapshot = await getDocs(collection(db, "todolist"));
   let docs = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 

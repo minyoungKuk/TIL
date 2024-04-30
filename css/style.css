@@ -118,6 +118,19 @@ button:hover {
   transition: 0.4s;
 }
 
+.form-area label {
+  margin-top: 20px;
+}
+
+.form-area input,
+.form-area textarea {
+  border: none;
+  padding: 20px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 8px;
+}
+
 .main {
   padding: 20px;
   padding-top: 100px;
